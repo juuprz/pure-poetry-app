@@ -6,6 +6,8 @@ const PORT = 7799;
 const dist = path.join(__dirname, '/../dist/');
 
 const app = express();
+const db = require('../database/index');
+require('../server/config/seed');
 
 app.use(bodyParser.json());
 app.use(express.static(dist));
