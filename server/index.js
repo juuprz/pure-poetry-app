@@ -15,6 +15,7 @@ app.use(bodyParser.json());
 app.use(express.static(dist));
 
 
+// ROUTES
 app.post('/api/post', postPoem);
 
-app.listen(PORT, () => console.log('this ya server listenin on', PORT));
+app.listen(PORT, () => console.log('Your server is listening on port', PORT));

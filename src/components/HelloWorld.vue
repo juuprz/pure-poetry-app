@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">does this work like i want it to?
+  <div class="hello">changing this this work like i want it to?
     <button @click="changeTitle" >Click here</button>
     <div>{{ result }}</div>
   </div>
