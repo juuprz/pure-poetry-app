@@ -5,10 +5,10 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "build-dev": "vue-cli-service build --mode development",
-    "server": "nodemon server/index.js",
-    "seed": "node server/config/seed.js",
     "lint": "vue-cli-service lint",
+    "build-dev": "vue-cli-service build --mode development",
+    "seed": "node server/config/seed.js",
+    "server": "nodemon server/index.js",
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
@@ -16,7 +16,8 @@
     "core-js": "^2.6.5",
     "express": "^4.17.1",
     "mongoose": "^5.7.0",
-    "vue": "^2.6.10"
+    "vue": "^2.6.10",
+    "vue-router": "^3.0.3"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.11.0",
