@@ -2,6 +2,7 @@
   <div class="hello">changing this this work like i want it to?
     <button @click="changeTitle" >Click here</button>
     <div>{{ result }}</div>
+    <button type="button" class="btn btn-primary">Primary</button>
   </div>
 </template>
 
