@@ -4,10 +4,10 @@
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Create A Poem<span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="#">Create New Poem<span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">View All Poems</a>
+          <a class="nav-link" href="#">View Poem Collection</a>
         </li>
       </ul>
     </div>
