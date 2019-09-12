@@ -9,13 +9,21 @@ const app = express();
 const db = require('../database/index');
 require('../server/config/seed');
 
-const { postPoem } = require('../database/controllers/poems');
+const {
+  postPoem,
+  getPoems,
+  deletePoem,
+  editPoem,
+} = require('../database/controllers/poems');
 
 app.use(bodyParser.json());
 app.use(express.static(dist));
 
 
 // ROUTES
-app.post('/api/post', postPoem);
+app.post('/api', postPoem);
+app.get('/api', getPoems);
+app.delete('/api', deletePoem);
+app.put('/api', editPoem);
 
 app.listen(PORT, () => console.log('Your server is listening on port', PORT));
