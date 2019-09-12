@@ -19,7 +19,7 @@ const getPoems = (req, res) => {
       const reqInfo = poems.map(poem => ({
         id: poem._id,
         createdAt: poem.createdAt,
-        updatedAt: poem.updatedAt,
+        poem: poem.poem,
       }));
       res.status(200).send(JSON.stringify(reqInfo));
     }, e => console.error('issue retrieving poems from the db', e));

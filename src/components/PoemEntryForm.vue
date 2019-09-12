@@ -2,19 +2,19 @@
   <div id="entry-form-outer">
     <form id='entry-form'>
       <div class="form-group">
-        <label>Nouns</label>
-        <input type="text" class="form-control" placeholder="">
-        <input type="text" class="form-control" placeholder="">
-        <input type="text" class="form-control" placeholder="">
-      </div>
-      <div class="form-group">
-        <label>Adjetives</label>
+        <label>Adjectives</label>
         <input type="text" class="form-control" placeholder="">
         <input type="text" class="form-control" placeholder="">
         <input type="text" class="form-control" placeholder="">
       </div>    
       <div class="form-group">
         <label>Adverbs</label>
+        <input type="text" class="form-control" placeholder="">
+        <input type="text" class="form-control" placeholder="">
+        <input type="text" class="form-control" placeholder="">
+      </div>
+      <div class="form-group">
+        <label>Nouns</label>
         <input type="text" class="form-control" placeholder="">
         <input type="text" class="form-control" placeholder="">
         <input type="text" class="form-control" placeholder="">
@@ -37,6 +37,15 @@
 </template>
 <script>
 export default {
+  data: function() {
+    return {
+      adjectives: [],
+      adverbs: [],
+      nouns: [],
+      prepositions: [],
+      verbs: [],
+    }
+  }
 
   
 }
@@ -46,7 +55,7 @@ export default {
     margin: 0 auto;
     width: 15%;
     text-align: center;
-    
+
   }
 
 </style>

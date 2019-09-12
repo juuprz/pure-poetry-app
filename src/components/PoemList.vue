@@ -1,6 +1,5 @@
 <template>
   <div>
-    <div>hello from poemlist</div>
     <ul class="list-group">
       <li 
         v-for="poem in poems"
@@ -11,19 +10,6 @@
           v-bind:createdAt="poem.createdAt"
         />
       </li>
-      <br>
-      <li class="list-group-item mx-auto">
-        <PoemListEntry/>
-      </li>
-      <br>
-      <li class="list-group-item mx-auto">
-        <PoemListEntry/>
-      </li>
-      <br>
-      <li class="list-group-item mx-auto">
-        <PoemListEntry/>
-      </li>
-      <br>
     </ul>
   </div>
 </template>
@@ -36,29 +22,23 @@ export default {
   name: 'app',
   data: function() {
     return { 
-      poems: [
-      {
-        id: 1,
-        poem: 'Do the dishes',
-        createdAt: 'Jan 12, 2019'
-      },
-      {
-        id: 2,
-        poem: 'Take out the trash',
-        createdAt: 'Jan 12, 2019'
-      },
-      {
-        id: 3,
-        poem: 'Mow the lawn',
-        createdAt: 'Jan 12, 2019'
-      }
-      ],
+      poems: [],
     }},
   components: {
     PoemListEntry,
   },
+  mounted() {
+    axios.get('/api')
+    .then(
+      res => this.poems = res.data, 
+      e => console.error('issue getting poems from api', e)
+    )
+
+  }
 }
 </script>
 <style scoped lang="scss">
-
+li {
+  margin:20px auto;
+}
 </style>
