@@ -6,6 +6,10 @@ const poemSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    userInput: {
+      type: Object,
+      required: true,
+    },
   }, {
     id: false,
     toObject: {
