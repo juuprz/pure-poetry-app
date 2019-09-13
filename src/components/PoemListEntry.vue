@@ -3,10 +3,6 @@
     <div class="card-body">
       <p class="card-text">{{poem}}</p>
       <p class="card-text"><small class="text-muted">Submited {{ formattedDate }}</small></p>
-      <div class="button-group">
-        <a href="#" class="btn btn-primary">Edit</a>
-        <a href="#" class="btn btn-primary">Delete</a>
-      </div>
     </div>
   </div>
 </template>
@@ -17,6 +13,7 @@ const moment = require('moment');
 export default {
   data: function() {
     return {
+      show: false,
       
     }
   },
@@ -25,12 +22,8 @@ export default {
     formattedDate: function() {
       return moment(this.createdAt).fromNow();
     },
-  },
-  methods : {
-    onEditClick: function() {
-
-    },
-    
+  }, 
+  methods : {  
   },
   
 }
