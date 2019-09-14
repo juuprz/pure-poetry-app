@@ -7,7 +7,7 @@ const dist = path.join(__dirname, '/../dist/');
 
 const app = express();
 const db = require('../database/index');
-require('../server/config/seed');
+// require('../server/config/seed');
 
 const {
   postPoem,

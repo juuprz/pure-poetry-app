@@ -67,7 +67,7 @@ export default {
     onButtonClick: function() {
       let inputErrors = this.hasInputErrors();
       if (inputErrors) {
-        alert('Please enter valid input. Ensure all values are filled and that only English characters are used');
+        alert('Please enter valid input. Ensure all values are filled and that only English characters are used.');
       } else {
         this.postPoem();
       }

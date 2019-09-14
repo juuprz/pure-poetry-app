@@ -9,15 +9,12 @@
     </div>
   </div>
 </template>
-
 <script>
 const moment = require('moment');
-
 export default {
   data: function() {
     return {
       parsedPoem: []
-      
     }
   },
   props: ['poem', 'createdAt', 'id'],
@@ -29,12 +26,12 @@ export default {
   methods: {
     formatPoem: function() {
       this.parsedPoem = this.poem.split(/\n/g);
-    }
-  }, 
+    },
+  },
   mounted() {
-    this.formatPoem()
-  }
-}
+    this.formatPoem();
+  },
+};
 </script>
 <style scoped lang="scss">
 
@@ -50,4 +47,4 @@ export default {
   margin: 20px auto auto auto;
   padding: 0 auto;
 }
-</style>
+</style>;

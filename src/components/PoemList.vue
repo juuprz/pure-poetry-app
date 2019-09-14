@@ -21,9 +21,6 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">
-              {{ currentPoem.id }}
-            </h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -96,7 +93,6 @@ export default {
   },
   methods : {
     setCurrentPoem: function(poem, action) {
-      console.log('called set')
       this.currentPoem = poem
       if (action === 'delete') {
         this.deleteCurrentPoem()
@@ -116,16 +112,17 @@ export default {
       } else {
         axios.put('/api', { userInput: this.currentPoem.userInput, template: this.template, id: this.currentPoem.id })
         .then(
-            e => console.error(e)
-            ).then(
-          () => this.getCurrentPoemList(),
+          
+          () => {
+            this.getCurrentPoemList()
+            console.log('fired')
+            },
           e => console.error(e)
         )
       }
     },
     deleteCurrentPoem: function() {
       const id = this.currentPoem.id;
-      console.log(this.currentPoem.id)
       axios.delete('/api', { data: { data:  id  } })
       .then(
         res => console.log(res), 

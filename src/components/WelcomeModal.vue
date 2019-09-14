@@ -22,23 +22,14 @@
     </div>
   </div>
 </template>
-<script>
-export default {
-
-  
-}
-</script>
 <style scoped lang="scss">
 .modal-header {
   color: #42b983;
   font-weight: bold;
   font-size: 42px;
 }
-
 .modal-body {
   text-align: center;
 }
-
-
 </style>
 
