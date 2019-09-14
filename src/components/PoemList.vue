@@ -96,6 +96,7 @@ export default {
   },
   methods : {
     setCurrentPoem: function(poem, action) {
+      console.log('called set')
       this.currentPoem = poem
       if (action === 'delete') {
         this.deleteCurrentPoem()
@@ -148,9 +149,9 @@ export default {
       }
       inputArr.forEach(v => {
           v = v.trim();
-          if (typeof parseInt(v) === 'number') {
+          if (parseInt(v) || v == 0) {
             hasErrors = true;
-          }
+          } 
           let hasNonEnglish = String(v).match(re);
           if ( hasNonEnglish|| v===undefined || v==='undefined' || v===''){
               hasErrors = true;
@@ -159,8 +160,6 @@ export default {
       return hasErrors;
     }
   },
-
-
   mounted() {
     this.getCurrentPoemList()
   }
@@ -169,5 +168,11 @@ export default {
 <style scoped lang="scss">
 li {
   margin:20px auto;
+}
+.btn {
+  margin: 10px;
+}
+label {
+  font-size: 20px;
 }
 </style>

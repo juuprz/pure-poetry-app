@@ -31,13 +31,20 @@
         <input type="text" class="form-control" v-model="userInput.verbs[1]" placeholder="">
         <input type="text" class="form-control" v-model="userInput.verbs[2]" placeholder="">
       </div>
+      <button type="button" @click="onButtonClick()" class="btn btn-primary">Generate Poem</button>
     </form>
-    <button type="button" @click="onButtonClick()" class="btn btn-primary">Generate Poem</button>
-    <div>{{poem}}</div>
+    <br>
+    <div class="poem-card" v-if="poem">
+      <label>Your New Poem!</label>
+      <PoemListEntry
+        v-bind:poem="poem"
+      />
+    </div>
   </div>
 </template>
 <script>
 const axios = require('axios');
+import PoemListEntry from './PoemListEntry.vue';
 
 export default {
   data: function() {
@@ -53,6 +60,9 @@ export default {
       },
     }
   },
+  components : {
+    PoemListEntry,
+  },
   methods: {
     onButtonClick: function() {
       let inputErrors = this.hasInputErrors();
@@ -61,7 +71,6 @@ export default {
       } else {
         this.postPoem();
       }
-      
     },
     postPoem: function() {
       axios.post('/api', { userInput: this.userInput, template: this.template })
@@ -83,7 +92,7 @@ export default {
       }
       inputArr.forEach(v => {
           v = v.trim();
-          if (typeof parseInt(v) === 'number') {
+          if (parseInt(v) || v == 0) {
             hasErrors = true;
           } 
           let hasNonEnglish = String(v).match(re);
@@ -97,9 +106,25 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-  #entry-form-outer {
-    margin: 0 auto;
-    width: 15%;
-    text-align: center;
-  }
+#entry-form-outer {
+  margin-top: 20px;
+}
+#entry-form {
+  margin: 0 auto;
+  width: 15%;
+  text-align: center;
+}  
+.poem-card {
+  width: 90%;
+  text-align: center;
+  margin: 20px auto auto auto;
+  padding: 0 auto;
+}
+label {
+  font-size: 20px;
+  font-weight: bold;
+}
+.new-poem-label {
+  text-align: center;
+}
 </style>

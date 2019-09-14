@@ -3,7 +3,6 @@ const { generatePoem } = require('../helpers/generatePoem');
 
 // POST ONE
 const postPoem = (req, res) => {
-  // call structure poem
   const templatedPoem = generatePoem(req.body.template, req.body.userInput);
   Poem.create({ poem: templatedPoem, userInput: req.body.userInput })
     .then((poem) => {

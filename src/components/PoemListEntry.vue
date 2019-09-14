@@ -1,7 +1,10 @@
 <template>
-  <div class="card bg-light mb-3" style="max-width: 30rem;">
+  <div class="card bg-light mb-3 poem-card" style="width: 62rem;">
     <div class="card-body">
-      <p class="card-text">{{poem}}</p>
+      <p 
+      v-for="(line, index) in parsedPoem" 
+      :key="index"
+      class="card-text">{{line}}</p>
       <p class="card-text"><small class="text-muted">Submited {{ formattedDate }}</small></p>
     </div>
   </div>
@@ -13,7 +16,7 @@ const moment = require('moment');
 export default {
   data: function() {
     return {
-      show: false,
+      parsedPoem: []
       
     }
   },
@@ -23,16 +26,28 @@ export default {
       return moment(this.createdAt).fromNow();
     },
   }, 
-  methods : {  
-  },
-  
+  methods: {
+    formatPoem: function() {
+      this.parsedPoem = this.poem.split(/\n/g);
+    }
+  }, 
+  mounted() {
+    this.formatPoem()
+  }
 }
 </script>
 <style scoped lang="scss">
-.btn {
-  margin: 10px;
+
+.card-text {
+  text-align:center;
 }
 .button-group {
   text-align:right;
+}
+.poem-card {
+  width: 90%;
+  text-align: center;
+  margin: 20px auto auto auto;
+  padding: 0 auto;
 }
 </style>
