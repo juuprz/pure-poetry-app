@@ -3,7 +3,7 @@
     <ul class="list-group">
       <li
         v-for="poem in poems"
-        v-bind:key="poem.id"
+        :key="poem.id"
         class="list-group-item mx-auto">
         <PoemListEntry
           v-bind:poem="poem.poem"
@@ -13,7 +13,7 @@
         />
         <div class="button-group">
           <a href="#" v-on:click="setCurrentPoem(poem)" data-toggle="modal" data-target="#editModal" class="btn btn-primary">Edit</a>
-          <a href="#" class="btn btn-primary">Delete</a>
+          <a href="#" v-on:click="setCurrentPoem(poem, 'delete')" class="btn btn-primary">Delete</a>
         </div>
       </li>
     </ul>
@@ -61,11 +61,10 @@
                 <input type="text" class="form-control" v-model="currentPoem.userInput.verbs[2]" placeholder="">
               </div>
             </form>
-            {{ currentPoem.id }}
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" v-on:click="editCurrentPoem()" class="btn btn-primary">Save changes</button>
           </div>
         </div>
       </div>
@@ -82,6 +81,8 @@ export default {
   data: function() {
     return { 
       poems: [],
+      template: 'winter',
+      editedPoem: '',
       currentPoem: {
         userInput : {
           adjectives: [],
@@ -96,17 +97,46 @@ export default {
     PoemListEntry,
   },
   methods : {
-    setCurrentPoem: function(poem) {
+    setCurrentPoem: function(poem, action) {
       this.currentPoem = poem
-    }
+      if (action === 'delete') {
+        this.deleteCurrentPoem()
+      }
+    },
+    getCurrentPoemList: function(){
+      axios.get('/api')
+      .then(
+        res => this.poems = res.data, 
+        e => console.error('issue getting poems from api', e)
+      )
+    },
+    editCurrentPoem: function() {
+      axios.put('/api', { userInput: this.currentPoem.userInput, template: this.template, id: this.currentPoem.id })
+      .then(
+        res => this.editedPoem = res.data.poem, 
+          e => console.error(e)
+          ).then(
+        () => this.getCurrentPoemList(),
+        e => console.error(e)
+      )
+    },
+    deleteCurrentPoem: function() {
+      const id = this.currentPoem.id;
+      console.log(this.currentPoem.id)
+      axios.delete('/api', { data: { data:  id  } }
+        )
+      .then(
+        res => console.log(res), 
+          e => console.error(e)
+          ).then(
+        () => this.getCurrentPoemList(),
+        e => console.error(e)
+      )
+    },
   },
 
   mounted() {
-    axios.get('/api')
-    .then(
-      res => this.poems = res.data, 
-      e => console.error('issue getting poems from api', e)
-    )
+    this.getCurrentPoemList()
   }
 }
 </script>

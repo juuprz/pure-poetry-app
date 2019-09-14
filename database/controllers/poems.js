@@ -29,7 +29,7 @@ const getPoems = (req, res) => {
 };
 // DELETE ONE
 const deletePoem = (req, res) => {
-  Poem.deleteOne({ _id: req.body.id })
+  Poem.findByIdAndRemove(req.body.data)
     .then((poem) => {
       console.log(poem, 'has been deleted');
       res.sendStatus(200);
@@ -38,7 +38,12 @@ const deletePoem = (req, res) => {
 };
 // EDIT ONE
 const editPoem = (req, res) => {
-  Poem.updateOne({ _id: req.body.id }, { poem: req.body.poem })
+  const editedPoem = generatePoem(req.body.template, req.body.userInput);
+  const updated = {
+    poem: editedPoem,
+    userInput: req.body.userInput,
+  };
+  Poem.updateOne({ _id: req.body.id }, updated)
     .then((poem) => {
       console.log(poem, 'has been updated in the db');
       res.sendStatus(200);
