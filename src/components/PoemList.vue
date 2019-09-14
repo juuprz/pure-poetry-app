@@ -112,7 +112,6 @@ export default {
       } else {
         axios.put('/api', { userInput: this.currentPoem.userInput, template: this.template, id: this.currentPoem.id })
         .then(
-          
           () => {
             this.getCurrentPoemList()
             console.log('fired')

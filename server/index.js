@@ -18,8 +18,6 @@ const {
 
 app.use(bodyParser.json());
 app.use(express.static(dist));
-
-
 // ROUTES
 app.post('/api', postPoem);
 app.get('/api', getPoems);
