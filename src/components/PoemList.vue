@@ -82,7 +82,6 @@ export default {
     return { 
       poems: [],
       template: 'winter',
-      editedPoem: '',
       currentPoem: {
         userInput : {
           adjectives: [],
@@ -113,7 +112,6 @@ export default {
     editCurrentPoem: function() {
       axios.put('/api', { userInput: this.currentPoem.userInput, template: this.template, id: this.currentPoem.id })
       .then(
-        res => this.editedPoem = res.data.poem, 
           e => console.error(e)
           ).then(
         () => this.getCurrentPoemList(),
@@ -123,8 +121,7 @@ export default {
     deleteCurrentPoem: function() {
       const id = this.currentPoem.id;
       console.log(this.currentPoem.id)
-      axios.delete('/api', { data: { data:  id  } }
-        )
+      axios.delete('/api', { data: { data:  id  } })
       .then(
         res => console.log(res), 
           e => console.error(e)

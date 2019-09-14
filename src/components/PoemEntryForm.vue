@@ -55,7 +55,13 @@ export default {
   },
   methods: {
     onButtonClick: function() {
-      this.postPoem();
+      let inputErrors = this.hasInputErrors();
+      if (inputErrors) {
+        alert('Please enter valid input. Ensure all values are filled and that only English characters are used');
+      } else {
+        this.postPoem();
+      }
+      
     },
     postPoem: function() {
       axios.post('/api', { userInput: this.userInput, template: this.template })
@@ -63,6 +69,27 @@ export default {
         res => this.poem = res.data.poem, 
           e => console.error(e));
     },
+    hasInputErrors: function() {
+      let hasErrors = false;
+      var grammarTypes = Object.keys(this.userInput);
+      const re = '[^\x00-\x7F]';
+      let inputArr = [];
+      for (let type of grammarTypes) {
+          let vals = Object.values(this.userInput[type])
+          inputArr = inputArr.concat(vals)
+      } 
+      if (inputArr.length !== 15) {
+        return hasErrors = true;
+      }
+      console.log(inputArr)
+      inputArr.forEach(v => {
+          let hasNonEnglish = String(v).match(re);
+          if ( hasNonEnglish|| v===undefined || v==='undefined'){
+              hasErrors = true;
+          }
+      })
+      return hasErrors;
+    }
   }
 }
 </script>
@@ -71,7 +98,5 @@ export default {
     margin: 0 auto;
     width: 15%;
     text-align: center;
-
   }
-
 </style>
