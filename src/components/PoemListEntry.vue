@@ -2,7 +2,7 @@
   <div class="card bg-light mb-3 poem-card" style="width: 62rem;">
     <div class="card-body">
       <p 
-      v-for="(line, index) in parsedPoem" 
+      v-for="(line, index) in formattedPoem" 
       :key="index"
       class="card-text">{{line}}</p>
       <p class="card-text"><small class="text-muted">Submited {{ formattedDate }}</small></p>
@@ -12,22 +12,16 @@
 <script>
 const moment = require('moment');
 export default {
-  data: function() {
-    return {
-      parsedPoem: []
-    }
-  },
+
   props: ['poem', 'createdAt', 'id'],
   computed: {
     formattedDate: function() {
       return moment(this.createdAt).fromNow();
     },
-  }, 
-  methods: {
-    formatPoem: function() {
-      this.parsedPoem = this.poem.split(/\n/g);
+    formattedPoem: function() {
+      return this.poem.split(/\n/g);
     },
-  },
+  }, 
   mounted() {
     this.formatPoem();
   },
