@@ -5,29 +5,19 @@
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### To Spin up the server and db
 ```
-npm run serve
+npm run server
 ```
 
-### Compiles and minifies for production
+### Compile webpack
+For production
 ```
 npm run build
 ```
-
-### Run your tests
+For dev (live recompiling)
 ```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Run your unit tests
-```
-npm run test:unit
+npm run build-deve
 ```
 
 ### Customize configuration
