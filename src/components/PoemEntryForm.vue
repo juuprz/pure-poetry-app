@@ -77,12 +77,15 @@ export default {
       for (let type of grammarTypes) {
           let vals = Object.values(this.userInput[type])
           inputArr = inputArr.concat(vals)
-      } 
+      }
       if (inputArr.length !== 15) {
         return hasErrors = true;
       }
-      console.log(inputArr)
       inputArr.forEach(v => {
+          v = v.trim();
+          if (typeof parseInt(v) === 'number') {
+            hasErrors = true;
+          } 
           let hasNonEnglish = String(v).match(re);
           if ( hasNonEnglish|| v===undefined || v==='undefined'){
               hasErrors = true;

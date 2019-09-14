@@ -71,7 +71,6 @@
     </div>     
   </div>
 </template>
-
 <script>
 import PoemListEntry from './PoemListEntry.vue';
 const axios = require('axios');
@@ -110,13 +109,18 @@ export default {
       )
     },
     editCurrentPoem: function() {
-      axios.put('/api', { userInput: this.currentPoem.userInput, template: this.template, id: this.currentPoem.id })
-      .then(
+      let inputErrors = this.hasInputErrors();
+      if (inputErrors) {
+        alert('Please enter valid input. Blanks, Numbers, and non-English characters are disallowed.');
+      } else {
+        axios.put('/api', { userInput: this.currentPoem.userInput, template: this.template, id: this.currentPoem.id })
+        .then(
+            e => console.error(e)
+            ).then(
+          () => this.getCurrentPoemList(),
           e => console.error(e)
-          ).then(
-        () => this.getCurrentPoemList(),
-        e => console.error(e)
-      )
+        )
+      }
     },
     deleteCurrentPoem: function() {
       const id = this.currentPoem.id;
@@ -130,7 +134,32 @@ export default {
         e => console.error(e)
       )
     },
+    hasInputErrors: function() {
+      let hasErrors = false;
+      var grammarTypes = Object.keys(this.currentPoem.userInput);
+      const re = '[^\x00-\x7F]';
+      let inputArr = [];
+      for (let type of grammarTypes) {
+          let vals = Object.values(this.currentPoem.userInput[type])
+          inputArr = inputArr.concat(vals)
+      } 
+      if (inputArr.length !== 15) {
+        return hasErrors = true;
+      }
+      inputArr.forEach(v => {
+          v = v.trim();
+          if (typeof parseInt(v) === 'number') {
+            hasErrors = true;
+          }
+          let hasNonEnglish = String(v).match(re);
+          if ( hasNonEnglish|| v===undefined || v==='undefined' || v===''){
+              hasErrors = true;
+          }
+      })
+      return hasErrors;
+    }
   },
+
 
   mounted() {
     this.getCurrentPoemList()
