@@ -134,22 +134,16 @@ export default {
     hasInputErrors: function() {
       let hasErrors = false;
       var grammarTypes = Object.keys(this.currentPoem.userInput);
-      const re = '[^\x00-\x7F]';
+      const re = '[^a-zA-Z0-9]';
       let inputArr = [];
       for (let type of grammarTypes) {
           let vals = Object.values(this.currentPoem.userInput[type])
           inputArr = inputArr.concat(vals)
-      } 
-      if (inputArr.length !== 15) {
-        return hasErrors = true;
       }
       inputArr.forEach(v => {
           v = v.trim();
-          if (parseInt(v) || v == 0) {
-            hasErrors = true;
-          } 
           let hasNonEnglish = String(v).match(re);
-          if ( hasNonEnglish|| v===undefined || v==='undefined' || v===''){
+          if ( hasNonEnglish|| v===undefined || v===''){
               hasErrors = true;
           }
       })

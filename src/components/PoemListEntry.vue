@@ -12,7 +12,6 @@
 <script>
 const moment = require('moment');
 export default {
-
   props: ['poem', 'createdAt', 'id'],
   computed: {
     formattedDate: function() {
@@ -22,9 +21,6 @@ export default {
       return this.poem.split(/\n/g);
     },
   }, 
-  mounted() {
-    this.formatPoem();
-  },
 };
 </script>
 <style scoped lang="scss">
