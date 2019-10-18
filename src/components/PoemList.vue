@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- render poem entries in a list based on DB entries. -->
     <ul class="list-group">
       <li
         v-for="poem in poems"
@@ -17,6 +18,7 @@
         </div>
       </li>
     </ul>
+    <!-- modal to allow user to edit/delete selected poem -->
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -98,6 +100,7 @@ export default {
         this.deleteCurrentPoem()
       }
     },
+    // retrieve the current poem list through the api
     getCurrentPoemList: function(){
       axios.get('/api')
       .then(
@@ -105,6 +108,7 @@ export default {
         e => console.error('issue getting poems from api', e)
       )
     },
+    // allow user to edit current poems within modal view and update db on valid edit
     editCurrentPoem: function() {
       let inputErrors = this.hasInputErrors();
       if (inputErrors) {
@@ -114,7 +118,6 @@ export default {
         .then(
           () => {
             this.getCurrentPoemList()
-            console.log('fired')
             },
           e => console.error(e)
         )
